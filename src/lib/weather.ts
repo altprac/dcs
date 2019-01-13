@@ -2,13 +2,11 @@ import * as request from "request";
 
 const uri = `https://api.darksky.net/forecast/${process.env.WEATHER_KEY}/`;
 
-const checkLat = (lat: number) => isNaN(lat) || lat > 90 || lat < -90 ? false : true;
-
-const checkLong = (long: number) => isNaN(long) || long > 180 || long < -180 ? false : true;
+const checkCoords = (coOrd: number, deg: number) => isNaN(coOrd) || coOrd > deg || coOrd < -deg ? false : true;
 
 const weather = (cb: ICb, latitude: number, longitude: number): void => {
     const requestUri = `${uri}${latitude},${longitude}?exclude=currently,minutely,hourly,alerts,flags&units=si`;
-    if (!checkLat(latitude) || !checkLong(longitude)) {
+    if (!checkCoords(latitude, 90) || !checkCoords(longitude, 180)) {
         cb(new Error("400"));
         return;
     }
