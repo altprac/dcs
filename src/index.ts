@@ -15,12 +15,8 @@ const response = (res: any) => {
 
 app.get("/weather/:latitude/:longitude", (req, res) => {
     const cb = response(res);
-    try {
-        const {latitude, longitude} = req.params;
-        const temperatures = weather(cb, latitude, longitude);
-    } catch (error) {
-        cb(new Error("500"));
-    }
+    const {latitude, longitude} = req.params;
+    const temperatures = weather(cb, latitude, longitude);
 });
 
 app.listen(PORT);
