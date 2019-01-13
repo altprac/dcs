@@ -4,6 +4,6 @@ Edit the .env file to include your darksky API key.
 
 npm install
 
-npm build
+npm run build
 
- npm start
+npm start
